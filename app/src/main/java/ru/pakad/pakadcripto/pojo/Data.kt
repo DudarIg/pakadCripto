@@ -9,8 +9,5 @@ data class Data (
 )
 
 data class CoinInfo (
-	@SerializedName("Id") val id : Int,
-	@SerializedName("Name") val name : String,
-	@SerializedName("FullName") val fullName : String,
-	@SerializedName("ImageUrl") val imageUrl : String
+	@SerializedName("Name") val name: String? = null
 )

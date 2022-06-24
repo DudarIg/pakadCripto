@@ -11,7 +11,7 @@ interface ApiService {
     @GET("top/totalvolfull")
     fun getTopCoinsInfo(
         @Query("api_key") api_Key: String = API_KEY,
-        @Query("limit") limit: Int = 10,
+        @Query("limit") limit: Int = 50,
         @Query("tsym") tSym : String ="USD"
     ): Single<CointInfoListOfData>
 

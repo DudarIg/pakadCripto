@@ -1,23 +1,27 @@
 package ru.pakad.pakadcripto.pojo
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 
 data class CoinPriceInfoRawData(
 
-    @SerializedName("RAW") val coinPriceIntoRawObject : JsonObject
+    @SerializedName("RAW") val coinPriceInfoJsonObject : JsonObject? = null
 )
 
+@Entity(tableName = "full_price_list")
 data class CoinPriceInfo (
-
+    @PrimaryKey
     @SerializedName("FROMSYMBOL") val fromSymbol : String,
+
     @SerializedName("TOSYMBOL") val toSymbol : String,
     @SerializedName("MARKET") val market : String,
     @SerializedName("PRICE") val price : String,
     @SerializedName("LASTUPDATE") val lastUpdate : String,
     @SerializedName("LASTVOLUME") val lastVolume : String,
     @SerializedName("LASTVOLUMETO") val lASTVOLUMETO : String,
-    @SerializedName("LASTTRADEID") val lASTTRADEID : Int,
+    @SerializedName("LASTTRADEID") val lASTTRADEID : String,  /// int
     @SerializedName("VOLUMEDAY") val vOLUMEDAY : String,
     @SerializedName("VOLUMEDAYTO") val vOLUMEDAYTO : String,
     @SerializedName("VOLUME24HOUR") val vOLUME24HOUR : String,
