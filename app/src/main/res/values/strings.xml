@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">pakadCripto</string>
+    <string name="symbols_template">%s / %s</string>
+    <string name="update_template">Время последнего обновления: %s</string>
 </resources>

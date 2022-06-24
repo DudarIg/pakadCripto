@@ -1,6 +1,7 @@
 package ru.pakad.pakadcripto.adapters
 
 import CoinInfo
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.squareup.picasso.Picasso
 import ru.pakad.pakadcripto.R
 import ru.pakad.pakadcripto.pojo.CoinPriceInfo
 
-class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
+class CoinInfoAdapter(private val context: Context): RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
     var coinInfoToList : List<CoinPriceInfo> = listOf()
     set(value) {
@@ -19,20 +20,26 @@ class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>
         notifyDataSetChanged()
     }
 
+    var funListClick: ((CoinPriceInfo) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_coin_info, parent, false)
         return CoinInfoViewHolder(view)
     }
 
-
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
         val coin = coinInfoToList.get(position)
+        val symbolsTemplate = context.resources.getString(R.string.symbols_template)
+        val updateTemplate = context.resources.getString(R.string.update_template)
         with(holder) {
-            tvSymbols.text = coin.fromSymbol + " / " + coin.toSymbol
+            tvSymbols.text = String.format(symbolsTemplate, coin.fromSymbol,coin.toSymbol)
             tvPrice.text = coin.price
-            tvLastUpdate.text = coin.getFormattedTime()
+            tvLastUpdate.text = String.format(updateTemplate, coin.getFormattedTime())
             Picasso.get().load(coin.getFullImageUrl()).into(ivLogoCoin)
+        }
+        holder.itemView.setOnClickListener {
+            funListClick?.invoke(coin)
         }
     }
 

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     private val viewModel by viewModels<CoinViewModel>()
-    private val adapter = CoinInfoAdapter()
+    private val adapter = CoinInfoAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.priceList.observe(this, Observer {
            adapter.coinInfoToList = it
         })
+
+        adapter.funListClick = {
+                Log.d("QQQ", it.fromSymbol)
+        }
     }
 
 }
