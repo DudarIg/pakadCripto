@@ -24,5 +24,6 @@ interface ApiService {
 
     companion object {
         private const val API_KEY = "1277c72af4a1a94164f3a0e4e68c7ab82067fd654f410a884e7e5ceeba391118"
+
     }
 }

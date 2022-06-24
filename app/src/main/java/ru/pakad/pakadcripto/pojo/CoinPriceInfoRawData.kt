@@ -4,6 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
+import ru.pakad.pakadcripto.api.ApiFactory.BASE_IMAGE_URL
+import ru.pakad.pakadcripto.utils.convertTimestampToTime
 
 data class CoinPriceInfoRawData(
 
@@ -59,3 +61,11 @@ data class CoinPriceInfo (
     @SerializedName("TOTALTOPTIERVOLUME24HTO") val tOTALTOPTIERVOLUME24HTO : String,
     @SerializedName("IMAGEURL") val iMAGEURL : String
 )
+{
+    fun getFormattedTime(): String {
+        return convertTimestampToTime(lastUpdate)
+    }
+    fun getFullImageUrl(): String {
+        return BASE_IMAGE_URL + iMAGEURL
+    }
+}
